@@ -1,4 +1,4 @@
-package model;
+package components.chat.model;
 
 public class ChatMember {
     private String name;
@@ -14,5 +14,10 @@ public class ChatMember {
     public ChatMember setName(String name) {
         this.name = name;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

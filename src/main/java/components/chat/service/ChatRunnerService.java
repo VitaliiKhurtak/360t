@@ -1,6 +1,6 @@
-package service;
+package components.chat.service;
 
-import model.Chat;
+import components.chat.model.Chat;
 
 import java.util.UUID;
 

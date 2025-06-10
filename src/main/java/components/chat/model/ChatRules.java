@@ -1,11 +1,11 @@
-package model;
+package components.chat.model;
 
 public class ChatRules {
-    private final int maxMembers;
-    private final int maxSentMessages;
-    private final int maxReceivedMessages;
+    private final Integer maxMembers;
+    private final Integer maxSentMessages;
+    private final Integer maxReceivedMessages;
 
-    private ChatRules(int maxMembers, int maxSentMessages, int maxReceivedMessages) {
+    private ChatRules(Integer maxMembers, Integer maxSentMessages, Integer maxReceivedMessages) {
         this.maxMembers = maxMembers;
         this.maxSentMessages = maxSentMessages;
         this.maxReceivedMessages = maxReceivedMessages;
@@ -15,10 +15,22 @@ public class ChatRules {
         return new ChatRulesBuilder();
     }
 
+    public Integer getMaxMembers() {
+        return maxMembers;
+    }
+
+    public Integer getMaxSentMessages() {
+        return maxSentMessages;
+    }
+
+    public Integer getMaxReceivedMessages() {
+        return maxReceivedMessages;
+    }
+
     public static class ChatRulesBuilder {
-        private int maxMembers;
-        private int maxSentMessages;
-        private int maxReceivedMessages;
+        private Integer maxMembers;
+        private Integer maxSentMessages;
+        private Integer maxReceivedMessages;
 
         public ChatRulesBuilder maxMembers(int maxMembers) {
             this.maxMembers = maxMembers;
