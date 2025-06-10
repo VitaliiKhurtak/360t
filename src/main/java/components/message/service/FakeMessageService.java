@@ -1,5 +1,8 @@
 package components.message.service;
 
+/**
+ * generates fake messages based on arrays with words
+ */
 public interface FakeMessageService {
     String[] NOUNS = new String[]{"I", "She", "He", "It", "We", "They"};
     String[] VERBS = new String[]{"received", "sent", "will do"};

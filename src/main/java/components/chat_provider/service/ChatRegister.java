@@ -5,6 +5,9 @@ import components.chat.model.Chat;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * CRUD service for chats in terms of ChatProvider
+ */
 public interface ChatRegister {
     boolean isEmpty();
 

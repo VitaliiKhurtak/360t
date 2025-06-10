@@ -10,6 +10,9 @@ import components.chat_moderator.service.ChatRulesService;
 
 import java.util.Objects;
 
+/**
+ * default moderator that implements all rules for the test scenario. Also possible to create a separate class for each rule with more complex logic if needed
+ */
 public class DefaultModeratorService implements MaxMemberModeratorService, MaxReceivedMessagesModeratorService, MaxSentMessagesModeratorService {
     private final ChatRulesService chatRulesService;
     private final ChatHistoryService chatHistoryService;

@@ -6,6 +6,9 @@ import components.chat_provider.service.ChatRegister;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * simple chat register for testing
+ */
 public class TestChatRegister implements ChatRegister {
     private final Map<Chat, Thread> chatMap;
 

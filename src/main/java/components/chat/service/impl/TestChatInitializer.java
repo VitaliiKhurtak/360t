@@ -8,6 +8,9 @@ import components.chat.service.ChatHistoryService;
 import components.chat.service.ChatInitializer;
 import components.chat_moderator.service.ChatRulesService;
 
+/**
+ * initializer for testing. Requirement are taken from task
+ */
 public class TestChatInitializer implements ChatInitializer {
     private final static Integer MAX_MEMBERS = 2;
     private final static Integer MAX_SENT_MESSAGES = MAX_MEMBERS * 10;

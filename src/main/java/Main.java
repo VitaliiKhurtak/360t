@@ -31,18 +31,25 @@ public class Main {
         initChatProvider().init().startChats();
     }
 
-    private static ChatProvider initChatProvider() throws InterruptedException {
-        ChatRulesService chatRulesService = new ChatRulesServiceImpl();
-        ChatHistoryService chatHistoryService = new ChatHistoryServiceImpl();
-        ChatInitializer chatInitializer = new TestChatInitializer(chatRulesService, chatHistoryService);
+    private static ChatProvider initChatProvider() {
+        ChatRulesService chatRulesService = new ChatRulesServiceImpl(); // needed for chat initializer
+        ChatHistoryService chatHistoryService = new ChatHistoryServiceImpl(); // needed for chat initializer
+        ChatInitializer chatInitializer = new TestChatInitializer(chatRulesService, chatHistoryService); // service, that initialize chat
         Chat chat = chatInitializer.initializeChat();
-        Thread chatThread = initMessageServices(chat, chatHistoryService);
-        ChatRegister chatRegister = new TestChatRegister(chat, chatThread);
-        ChatModerator chatModerator = initChatModerator(chatRulesService, chatHistoryService);
+        Thread chatThread = initMessageServices(chat, chatHistoryService); // initialise all message services, that are used to start a test chat in a new thread
+        ChatRegister chatRegister = new TestChatRegister(chat, chatThread); // register chat and specified thread for it
+        ChatModerator chatModerator = initChatModerator(chatRulesService, chatHistoryService); // init chat moderators after chat and chat thread was initialized
 
-        return new AtLeastOneActiveChatProvider(chatRegister, chatModerator);
+        return new AtLeastOneActiveChatProvider(chatRegister, chatModerator); // create basic test chat provider with at least one active chat
     }
 
+    /**
+     * init message listener, consumer, provider, fakeMessageService and testChatService
+     *
+     * @param chat               chat instance
+     * @param chatHistoryService CRUD service for chat messages
+     * @return Thread that start a test chat
+     */
     private static Thread initMessageServices(Chat chat, ChatHistoryService chatHistoryService) {
         MessageListener messageListener = new DefaultMessageListener(chatHistoryService);
         MessageProvider messageProvider = new TestMessageProvider(messageListener);
@@ -50,11 +57,18 @@ public class Main {
         messageListener.listen(chat.getId(), messageConsumer);
 
         FakeMessageService fakeMessageService = new FakeMessageServiceImpl();
-        TestChatService testChatService =  new TestChatServiceImpl(chat, messageProvider, fakeMessageService);
+        TestChatService testChatService = new TestChatServiceImpl(chat, messageProvider, fakeMessageService);
 
         return testChatService.getThread();
     }
 
+    /**
+     * init 3 basic chat moderators
+     *
+     * @param chatRulesService   CRUD service to get chat rules
+     * @param chatHistoryService CRUD service to get messages and moderate them by rules
+     * @return test chat moderator with 3 basic checks
+     */
     private static ChatModerator initChatModerator(ChatRulesService chatRulesService, ChatHistoryService chatHistoryService) {
         MaxMemberModeratorService maxMemberModeratorService = new DefaultModeratorService(chatRulesService, chatHistoryService);
         MaxSentMessagesModeratorService maxSentMessagesModeratorService = new DefaultModeratorService(chatRulesService, chatHistoryService);

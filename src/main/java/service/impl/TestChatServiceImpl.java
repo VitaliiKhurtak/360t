@@ -19,6 +19,9 @@ public class TestChatServiceImpl implements TestChatService, Runnable {
         this.fakeMessageService = fakeMessageService;
     }
 
+    /**
+     * send fake message from initiator every second, can be interrupted if unregistered from provider, then while loop ends
+     */
     @Override
     public void run() {
         while (isRunning) {

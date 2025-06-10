@@ -5,6 +5,9 @@ import components.chat_moderator.service.ChatModerator;
 import components.chat_provider.service.ChatProvider;
 import components.chat_provider.service.ChatRegister;
 
+/**
+ * test chat provider with while condition, that at least one chat is alive and not moderated
+ */
 public class AtLeastOneActiveChatProvider implements ChatProvider, Runnable {
     private final ChatRegister chatRegister;
     private final ChatModerator chatModerator;

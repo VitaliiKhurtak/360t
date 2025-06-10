@@ -23,6 +23,11 @@ public class DefaultMessageListener implements MessageListener {
         consumers.put(chatId, consumer);
     }
 
+    /**
+     * save message to history and send to consumer
+     * @param chatId
+     * @param message
+     */
     @Override
     public void notify(UUID chatId, ChatMessage message) {
         chatHistoryService.updateHistoryByMessage(message);

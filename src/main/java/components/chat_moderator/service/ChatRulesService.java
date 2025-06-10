@@ -4,6 +4,9 @@ import components.chat.model.ChatRules;
 
 import java.util.UUID;
 
+/**
+ * CRUD service for chat rules
+ */
 public interface ChatRulesService {
     ChatRules getRules(UUID chatId);
 
